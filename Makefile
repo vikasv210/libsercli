@@ -1,4 +1,5 @@
 CC = gcc  # C compiler
+LIB_PATH := /usr/lib/
 CFLAGS = -fPIC -Wall -Wextra -O2 -g  # C flags
 LDFLAGS = -shared   # linking flags
 RM = rm -f   # rm command
@@ -20,6 +21,10 @@ $(SRCS:.c=.d):%.d:%.c
 	$(CC) $(CFLAGS) -MM $< >$@
 
 include $(SRCS:.c=.d)
+
+install:
+	cp ${TARGET_LIB} ${LIB_PATH}
+	ldconfig
 
 .PHONY: clean
 clean:
